@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #myElement {
+        background-color: aquamarine;
+        width: 50px;
+        height: 50px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myElement"></div>
+
+    <script>
+      function moveElement(renderFn, element) {
+        var running = true;
+        var lastFrame = performance.now();
+        //var lastFrame = +new Date();
+
+        function loop(now) {
+          // If render function returns false, stop loop
+          if (running) {
+            requestAnimationFrame(loop);
+            running = renderFn(now - lastFrame);
+            lastFrame = now;
+          }
+        }
+
+        loop(lastFrame);
+      }
+
+      var el = document.getElementById("myElement");
+      var duration = 500;
+      var distance = 500;
+      var left = 0;
+      var frameSec = 16;
+
+      var timeoutId = setTimeout(function () {
+        console.log("in timeout");
+      }, 500);
+      console.log("timeoutId", timeoutId);
+
+      var timeoutId = setTimeout(function () {
+        console.log("in timeout");
+      }, 500);
+      console.log("timeoutId", timeoutId);
+
+      var render = function (elapsed) {
+        var framesPainted = elapsed / frameSec;
+        left += 10 * framesPainted;
+        el.style.left = left + "px";
+        if (left > 400) {
+          return false;
+        }
+        return true;
+      };
+
+      moveElement(render);
+    </script>
+  </body>
+</html>

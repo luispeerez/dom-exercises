@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #myElement {
+        background-color: aquamarine;
+        width: 50px;
+        height: 50px;
+        position: relative;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myElement"></div>
+
+    <script>
+      function moveElement(duration, distance, element) {
+        var left = 0;
+        var lastFrame = Date.now(); //
+        var timer;
+        var frameTime = 16;
+
+        timer = setInterval(function () {
+          var now = Date.now();
+          console.log("now", now);
+          var elapsed = now - lastFrame;
+
+          var progress = elapsed / frameTime;
+          // Move the element on the right at ~600px/s
+          left = left + 10 * progress;
+          console.log("new left", left);
+          element.style.left = left + "px";
+          lastFrame = now;
+
+          if (left > 400) {
+            console.log("timer", timer);
+            clearInterval(timer);
+          }
+        }, frameTime);
+      }
+
+      var el = document.getElementById("myElement");
+      var duration = 500;
+      var distance = 500;
+      moveElement(duration, distance, el);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #myElement {
+        background-color: aquamarine;
+        width: 50px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myElement"></div>
+
+    <script>
+      function moveElement(duration, distance, element) {
+        var start = performance.now(); //Date.now();
+        function move(currentTime) {
+          var elapsed = currentTime - start;
+          var progress = elapsed / duration;
+          var amountToMove = progress * distance;
+          console.log("elapsed here", elapsed);
+          console.log("currentTime", currentTime);
+          console.log("amountToMove", amountToMove);
+
+          element.style.transform = `translateX(${amountToMove}px)`;
+
+          if (amountToMove < distance) {
+            requestAnimationFrame(move);
+          }
+        }
+
+        requestAnimationFrame(move);
+      }
+
+      var el = document.getElementById("myElement");
+      var duration = 500;
+      var distance = 500;
+      console.log("performanceTiming", PerformanceTiming.navigationStart);
+      moveElement(duration, distance, el);
+    </script>
+  </body>
+</html>

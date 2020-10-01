@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <a href="#" data-testid="some-link" class="class1 class2 class3"
+      >Some link</a
+    >
+    <p id="some-p"></p>
+    <input id="input-el" type="text" />
+
+    <button>Remove last span</button>
+    <script>
+      var nodeTypes = {};
+      for (var key in Node) {
+        nodeTypes[key] = Node[key];
+      }
+      console.log("node types", nodeTypes);
+      console.log("Document node type", document.nodeType);
+
+      var anchorEl = document.querySelector(".class1");
+      console.log("Anchor node type", anchorEl.nodeType);
+      console.log("Anchor node name", anchorEl.nodeName);
+
+      console.log("Anchor node dataset", anchorEl.dataset);
+      console.log("Anchor classes", anchorEl.classList);
+      console.log("Anchor class Name", anchorEl.className);
+      console.log("Anchor node constructor", anchorEl.constructor);
+
+      var spanEl = document.createElement("span");
+      spanEl.textContent = "Span content";
+      var italicEl = document.createElement("i");
+      italicEl.textContent = " italic text";
+      spanEl.appendChild(italicEl);
+      var pEl = document.getElementById("some-p");
+      pEl.appendChild(spanEl);
+
+      console.log("pEl children", pEl.children);
+
+      var anchorEl2 = document.createElement("a");
+      anchorEl2.textContent = "another link";
+      anchorEl2.setAttribute("href", "#");
+      anchorEl2.setAttribute("class", "some-a-class");
+      pEl.insertAdjacentElement("afterend", anchorEl2);
+      console.log(
+        "anchorEl2 child nodes (include text nodes)",
+        anchorEl2.childNodes
+      );
+      var anchorTextNode = anchorEl2.childNodes[0];
+      console.log("anchor text node", anchorTextNode);
+      console.log("anchor text node nodeValue", anchorTextNode.nodeValue);
+      console.log("anchor text node nodeType", anchorTextNode.nodeType);
+      console.log("anchor text node nodeName", anchorTextNode.nodeName);
+      console.log("anchor text node constructor", anchorTextNode.constructor);
+
+      var spanEl2 = document.createElement("span");
+      var spanEl2Text = document.createTextNode(" Span content");
+      var spanEl3 = document.createElement("span");
+      spanEl3.textContent = " other span";
+
+      spanEl2.appendChild(spanEl2Text);
+      anchorEl2.appendChild(spanEl2);
+      anchorEl2.appendChild(spanEl3);
+
+      console.log("all anchors", document.getElementsByTagName("a"));
+      var anchors = document.getElementsByTagName("a");
+      console.log("anchors", anchors);
+      console.log("anchors to array", Array.prototype.slice.call(anchors));
+
+      var inputEl = document.getElementById("input-el");
+      inputEl.focus();
+
+      console.log("document activeElement", document.activeElement);
+      console.log("input attributes", inputEl.attributes);
+      inputEl.setAttribute("value", "Value for input");
+
+      inputEl.classList.add("input-class1");
+      inputEl.classList.add("input-class2");
+      inputEl.classList.toggle("input-class1");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #red {
+        padding: 25px;
+        border: 25px;
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        /*position: relative;*/
+        margin: 10px;
+      }
+
+      #blue {
+        background: blue;
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+        border: 10px solid black;
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="red">
+      <div id="blue"></div>
+    </div>
+
+    <script>
+      var blueEl = document.getElementById("blue");
+      console.log("offsetParent", blueEl.offsetParent);
+      console.log(
+        "blueEl offsetTop, offsetLeft",
+        blueEl.offsetTop,
+        blueEl.offsetLeft
+      );
+      console.log("sizes with border", blueEl.offsetWidth, blueEl.offsetHeight);
+      console.log(
+        "sizes without border",
+        blueEl.clientWidth,
+        blueEl.clientHeight
+      );
+      console.log(
+        "sizes without border using getBoundingClientRect",
+        blueEl.getBoundingClientRect()
+      );
+    </script>
+  </body>
+</html>
